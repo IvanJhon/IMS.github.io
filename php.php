@@ -1,6 +1,6 @@
 <?php
 // Connect to the database
-$conn = new MongoClient("mongodb+srv://ivancarito2002:Carito2020@cluster0.qpf78xw.mongodb.net/IMS?retryWrites=true&w=majority");
+$conn = new MongoClient("mongodb://atlas-sql-64a7c3ba1874b22c74950fb8-z8l6n.a.query.mongodb.net/IMS?ssl=true&authSource=admin");
 $db = $conn->IMS;
 $collection = $db->user;
 // Check if the user is logged in
