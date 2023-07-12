@@ -1,28 +1,20 @@
-<?php
-// Connect to the database
-$conn = new MongoClient("mongodb://atlas-sql-64a7c3ba1874b22c74950fb8-z8l6n.a.query.mongodb.net/IMS?ssl=true&authSource=admin");
-$db = $conn->IMS;
-$collection = $db->user;
-// Check if the user is logged in
-if (isset($_SESSION['user'])) {
-    header("Location: index.php");
-    exit;
+
+use Exception;
+use MongoDB\Client;
+use MongoDB\Driver\ServerApi;
+
+$uri = mongodb+srv://ivancarito2002:Carito2020@cluster0.qpf78xw.mongodb.net/?retryWrites=true&w=majority;
+
+// Specify Stable API version 1
+$apiVersion = new ServerApi(ServerApi::V1);
+
+// Create a new client and connect to the server
+$client = new MongoDB\Client($uri, [], ['serverApi' => $apiVersion]);
+
+try {
+    // Send a ping to confirm a successful connection
+    $client->selectDatabase('admin')->command(['ping' => 1]);
+    echo "Pinged your deployment. You successfully connected to MongoDB!\n";
+} catch (Exception $e) {
+    printf($e->getMessage());
 }
-// Check if the form is submitted
-if (isset($_POST['user']) && isset($_POST['pass'])) {
-    // Get the username and password from the form
-    $user = $_POST['user'];
-    $pass = $_POST['pass'];
-    // Check if the username and password are valid
-    $user = $collection->findOne(array('user' => $user, 'pass' => $pass));
-    if ($user) {
-        // The user is logged in
-        $_SESSION['user'] = $user;
-        header("Location: index.php");
-        exit;
-    } else {
-        // The username and password are not valid
-        echo "Invalid username or password.";
-    }
-}
-?>
