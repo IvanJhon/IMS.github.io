@@ -1,23 +1,23 @@
 <?php
 // Connect to the database
-$conn = new MongoClient("mongodb://localhost:27017");
-$db = $conn->mydb;
-$collection = $db->users;
+$conn = new MongoClient("mongodb+srv://ivancarito2002:Carito2020@cluster0.qpf78xw.mongodb.net/IMS?retryWrites=true&w=majority");
+$db = $conn->IMS;
+$collection = $db->user;
 // Check if the user is logged in
-if (isset($_SESSION['username'])) {
+if (isset($_SESSION['user'])) {
     header("Location: index.php");
     exit;
 }
 // Check if the form is submitted
-if (isset($_POST['username']) && isset($_POST['password'])) {
+if (isset($_POST['user']) && isset($_POST['pass'])) {
     // Get the username and password from the form
-    $username = $_POST['username'];
-    $password = $_POST['password'];
+    $user = $_POST['user'];
+    $pass = $_POST['pass'];
     // Check if the username and password are valid
-    $user = $collection->findOne(array('username' => $username, 'password' => $password));
+    $user = $collection->findOne(array('user' => $user, 'pass' => $pass));
     if ($user) {
         // The user is logged in
-        $_SESSION['username'] = $username;
+        $_SESSION['user'] = $user;
         header("Location: index.php");
         exit;
     } else {
