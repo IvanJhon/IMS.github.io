@@ -5,7 +5,7 @@ use Exception;
 use MongoDB\Client;
 use MongoDB\Driver\ServerApi;
 // Connect to the database
-$conn = new MongoClient("mongodb+srv://ivancarito2002:Carito2020@cluster0.qpf78xw.mongodb.net/IMS?retryWrites=true&w=majority");
+$conn = new MongoClient("mongodb+srv://ivancarito2002:CArito009@cluster0.qpf78xw.mongodb.net/IMS?retryWrites=true&w=majority");
 $db = $conn->IMS;
 $collection = $db->user;
 // Specify Stable API version 1
